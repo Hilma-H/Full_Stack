@@ -26,13 +26,19 @@ selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/spa\
 palvelin-->selain: HTML-koodi\
 selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css\
 palvelin-->selain: main.css\
-selain-->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js\
+selain-->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/spa.js\
 palvelin-->selain: spa.js\
 selain-->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json\
 palvelin-->selain: data.json\
 \
 title Single page uusi muistiinpano\
 \
+note over selain:\
+POST-pyynt\'f6, joka sis\'e4lt\'e4\'e4 JSON-muodossa olevan uuden muistiinpanon.\
+end note\
 selain->palvelin: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa\
-palvelin-->selain: data.json (?)\
+palvelin-->selain: 201 Created\
+note over selain\
+Ei uudelleenohjausta ja selain pysyy samalla sivulla.\
+end note\
 }
