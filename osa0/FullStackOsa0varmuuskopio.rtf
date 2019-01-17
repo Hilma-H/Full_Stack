@@ -7,7 +7,10 @@
 
 \f0\fs28 \cf0 title Uusi muistiinpano\
 selain->palvelin: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_notes\
-palvelin-->selain: uudelleenohjaus,HTTP status 302\
+note over palvelin:\
+Palvelin kehottaa selainta tekem\'e4\'e4n uuden HTTP GET pyynn\'f6n \
+end note\
+palvelin-->selain: HTTP-statuskoodi 302\
 selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes\
 palvelin-->selain: HTML-koodi\
 selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css\
