@@ -24,6 +24,13 @@ const Statistics = (props) => {
     
   }
 
+const Button = (props) => (
+    <button onClick={props.hClick}>
+        {props.text}
+    </button>
+)
+            
+
 const App = (props) => {
     const [ good, setGood ] = useState(0)
     const [ neutral, setNeutral ] = useState(0)
@@ -50,9 +57,9 @@ const App = (props) => {
     return (
       <div>
         <h1>{header}</h1>
-        <button onClick={goodClick}>Hyvä</button>
-        <button onClick={neutralClick}>Neutraali</button>
-        <button onClick={badClick}>Huono</button>
+        <Button hClick={goodClick} text='Hyvä'/>
+        <Button hClick={neutralClick} text='Neutraali'/>
+        <Button hClick={badClick} text='Huono'/>
         <Statistics stats={stats} 
         good={good} neutral={neutral} bad={bad}
         allClicks={allClicks}/>
