@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const App = (props) => {
-    const [ counter1, setCounter1 ] = useState(0)
-    const [ counter2, setCounter2 ] = useState(0)
-    const [ counter3, setCounter3 ] = useState(0)
+    const [ good, setGood] = useState(0)
+    const [ neutral, setNeutral ] = useState(0)
+    const [ bad, setBad] = useState(0)
     const course = 'Anna palautetta:'
     const part1 = 'Hyvä'
     const part2 = 'Neutraali'
@@ -13,19 +13,16 @@ const App = (props) => {
     return (
       <div>
         <h1>{course}</h1>
-        <button onClick={() => setCounter1(counter1 + 1)}>Hyvä</button>
-        <button onClick={() => setCounter2(counter2 + 1)}>Neutraali</button>
-        <button onClick={() => setCounter3(counter3 + 1)}>Huono</button>
+        <button onClick={() => setGood(good + 1)}>Hyvä</button>
+        <button onClick={() => setNeutral(neutral + 1)}>Neutraali</button>
+        <button onClick={() => setBad(bad + 1)}>Huono</button>
         <h1>Statistiikka:</h1>
-        <p>
-          {part1} {counter1}
-        </p>
-        <p>
-          {part2} {counter2}
-        </p>
-        <p>
-          {part3} {counter3}
-        </p>
+        <p>{part1} {good}</p>
+        <p>{part2} {neutral}</p>
+        <p>{part3} {bad}</p>
+        <p>Yhteensä: {good+neutral+bad}</p>
+        <p>Keskiarvo: {(good-bad)/(good+neutral+bad)}</p>
+        <p>Positiivisia: {good/(good+neutral+bad)*100} %</p>
       </div>
     )
   
