@@ -5,13 +5,14 @@ import ReactDOM from "react-dom";
 const Header = props => <h1>{props.course}</h1>;
 
 const Total = props => {
-  const total =
-    props.parts[0].exercises +
-    props.parts[1].exercises +
-    props.parts[2].exercises;
-
+  function summa(sum, exer) {
+    return sum + exer.exercises;
+  }
+  const total = props.parts.reduce(summa,0)
   return <p>Yhteensä {total} tehtävää</p>;
 };
+
+//vaihtoehtona: part.map(p=>p.exer).reduce
 
 const Part = props => {
   return (
