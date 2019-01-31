@@ -10,11 +10,10 @@ const Total = props => {
     props.parts[1].exercises +
     props.parts[2].exercises;
 
-  return <p>yhteensä {total} tehtävää</p>;
+  return <p>Yhteensä {total} tehtävää</p>;
 };
 
 const Part = props => {
-  console.log("propsin arvo on", props);
   return (
     <p>
       {props.part.name} {props.part.exercises}
@@ -22,23 +21,37 @@ const Part = props => {
   );
 };
 
+const Courses = (parametrit) => {
+    console.log('', parametrit)
+    const list = () => parametrit.part.map(x =>
+    <Part key={x.id} part = {x} />
+    )
+    
+    return (
+        <div>
+           <ul>{list()}</ul> 
+        </div>
+    )
+}
+
 const Content = props => {
   return (
     <div>
-      <Part part={props.parts[0]} />
-      <Part part={props.parts[1]} />
-      <Part part={props.parts[2]} />
+      <Courses part={props.parts} />
     </div>
   );
 };
+
 const Course = props => {
   return (
     <div>
       <Header course={props.course.name} />
       <Content parts={props.course.parts} />
+      <Total parts={props.course.parts} />
     </div>
   );
 };
+
 const App = () => {
   const course = {
     name: "Half Stack -sovelluskehitys",
@@ -63,9 +76,6 @@ const App = () => {
 
   return (
     <div>
-      {/* <Header course={course.name} /> 
-      <Content parts={course.parts} />
-      <Total parts={course.parts} /> */}
       <Course course={course} />
     </div>
   );
