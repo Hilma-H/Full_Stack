@@ -1,54 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// Kopioitu pohja mallivastauksista
-
-const Header = props => <h1>{props.course}</h1>;
-
-const Total = props => {
-  function summa(sum, exer) {
-    return sum + exer.exercises;
-  }
-  const total = props.parts.reduce(summa, 0);
-  return <p>Yhteensä {total} tehtävää</p>;
-};
-
-//vaihtoehtona: part.map(p=>p.exer).reduce
-
-const Part = props => {
-  return (
-    <p>
-      {props.part.name} {props.part.exercises}
-    </p>
-  );
-};
-
-const Courseparts = parametrit => {
-  const list = () => parametrit.part.map(x => <Part key={x.id} part={x} />);
-
-  return (
-    <div>
-      <ul>{list()}</ul>
-    </div>
-  );
-};
-
-const Content = props => {
-  return (
-    <div>
-      <Courseparts part={props.parts} />
-    </div>
-  );
-};
-
-const Course = props => {
-  return (
-    <div>
-      <Header course={props.course.name} />
-      <Content parts={props.course.parts} />
-      <Total parts={props.course.parts} />
-    </div>
-  );
-};
+import Course from './components/course'
 
 const App = () => {
   const courses = [
