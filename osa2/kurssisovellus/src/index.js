@@ -8,7 +8,7 @@ const Total = props => {
   function summa(sum, exer) {
     return sum + exer.exercises;
   }
-  const total = props.parts.reduce(summa,0)
+  const total = props.parts.reduce(summa, 0);
   return <p>Yhteensä {total} tehtävää</p>;
 };
 
@@ -22,23 +22,20 @@ const Part = props => {
   );
 };
 
-const Courses = (parametrit) => {
-    console.log('', parametrit)
-    const list = () => parametrit.part.map(x =>
-    <Part key={x.id} part = {x} />
-    )
-    
-    return (
-        <div>
-           <ul>{list()}</ul> 
-        </div>
-    )
-}
+const Courseparts = parametrit => {
+  const list = () => parametrit.part.map(x => <Part key={x.id} part={x} />);
+
+  return (
+    <div>
+      <ul>{list()}</ul>
+    </div>
+  );
+};
 
 const Content = props => {
   return (
     <div>
-      <Courses part={props.parts} />
+      <Courseparts part={props.parts} />
     </div>
   );
 };
@@ -54,30 +51,50 @@ const Course = props => {
 };
 
 const App = () => {
-  const course = {
-    name: "Half Stack -sovelluskehitys",
-    parts: [
-      {
-        name: "Reactin perusteet",
-        exercises: 10,
-        id: 1
-      },
-      {
-        name: "Tiedonvälitys propseilla",
-        exercises: 7,
-        id: 2
-      },
-      {
-        name: "Komponenttien tila",
-        exercises: 14,
-        id: 3
-      }
-    ]
-  };
-
+  const courses = [
+    {
+      name: "Half Stack -sovelluskehitys",
+      id: 1,
+      parts: [
+        {
+          name: "Reactin perusteet",
+          exercises: 10,
+          id: 1
+        },
+        {
+          name: "Tiedonvälitys propseilla",
+          exercises: 7,
+          id: 2
+        },
+        {
+          name: "Komponenttien tila",
+          exercises: 14,
+          id: 3
+        }
+      ]
+    },
+    {
+      name: "Node.js",
+      id: 2,
+      parts: [
+        {
+          name: "Routing",
+          exercises: 2,
+          id: 1
+        },
+        {
+          name: "Middlewaret",
+          exercises: 7,
+          id: 2
+        }
+      ]
+    }
+  ];
+  const all = () => courses.map(x => <Course key={x.id} course={x} />);
   return (
     <div>
-      <Course course={course} />
+      <h1>Opetusohjelma</h1>
+      {all()}
     </div>
   );
 };
