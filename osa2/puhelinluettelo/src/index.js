@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react'
 import ReactDOM from "react-dom";
+import axios from 'axios'
+
 
 const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas", number: "123-1234567"}]);
@@ -24,6 +26,15 @@ const App = () => {
     console.log("nappia painettu", event.target);
     }
   };
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        setPersons(response.data)
+      })
+  }, [])
 
   return (
     <div>
