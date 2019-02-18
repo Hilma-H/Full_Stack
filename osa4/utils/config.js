@@ -1,6 +1,11 @@
-  PORT = 3000
-  MONGODB_URI = "mongodb+srv://full_stack:lumimaa@cluster0-qi0xb.mongodb.net/test?retryWrites=true"
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+const MONGODB_URI = process.env.MONGODB_URI
+const PORT = process.env.PORT
+const SECRET = process.env.SECRET
   module.exports = {
     MONGODB_URI,
-    PORT
+    PORT,
+    SECRET
   }
