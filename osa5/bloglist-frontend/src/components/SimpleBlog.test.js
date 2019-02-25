@@ -8,21 +8,17 @@ afterEach(cleanup)
 test('renders title', () => {
   const blog = {
     title: 'Otsikko tulee oikein',
-    author: 'Kirjoittaja tulee oikein',
-    url: 'url tulee oikein',
+    author: 'Kirjoittaja tulee oikein'
   }
 
   const component = render(
     <SimpleBlog blog={blog} />
   )
 
-  expect(component.title).toHaveTextContent(
+  expect(component.container.title).toHaveTextContent(
     'Otsikko tulee oikein'
   )
-  expect(component.author).toHaveTextContent(
+  expect(component.container.author).toHaveTextContent(
     'Kirjoittaja tulee oikein'
-  )
-  expect(component.url).toHaveTextContent(
-    'url tulee oikein'
   )
 })

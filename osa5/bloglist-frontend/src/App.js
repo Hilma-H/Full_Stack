@@ -3,6 +3,7 @@ import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import PropTypes from 'prop-types'
+import  { useField } from './hooks'
 
 const NewBlogForm = ({
   handleBlog,
@@ -49,13 +50,17 @@ NewBlogForm.propTypes = {
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
-  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
+  const [notification, setNotification] = useState('')
   const [newauthor, setNewAuthor] = useState('')
   const [newtitle, setNewTitle] = useState('')
   const [newurl, setNewUrl] = useState('')
   const [FormVisible, setFormVisible] = useState(false)
+  const usernimi = useField('text')
+
+
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
@@ -86,9 +91,9 @@ const App = () => {
         setNewAuthor('')
         setNewTitle('')
         setNewUrl('')
+        setNotification(`Uusi blogi '${newtitle}' lisätty`)
       })
   }
-
   const newBlogform = () => {
     const hideWhenVisible = { display: FormVisible ? 'none' : '' }
     const showWhenVisible = { display: FormVisible ? '' : 'none' }
@@ -113,7 +118,6 @@ const App = () => {
       </div>
     )
   }
-
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
@@ -137,18 +141,32 @@ const App = () => {
   const handleLogOut = () => {
     window.localStorage.removeItem('loggedBlogappUser')
   }
-
+  const Notification = ({ message }) => {
+    if (message === null) {
+      return null
+    }
+  
+    return (
+      <div className="error">
+        {message}
+      </div>
+    )
+  }
   if (user === null) {
     return (
       <div>
+        <Notification message={errorMessage} />
         <h2>Kirjaudu Blogilistaan</h2>
         <form onSubmit={handleLogin}>
           <div>
           käyttäjätunnus
             <input
-              type="text"
-              value={username}
+          //    type={usernimi.type}
+          //    value={usernimi.username}
               name="Username"
+          //    onChange={usernimi.onChange}
+              type="Text"
+              value = {username}
               onChange={({ target }) => setUsername(target.value)}
             />
           </div>
@@ -169,6 +187,7 @@ const App = () => {
 
   return (
     <div>
+      <Notification message = {notification} />
       <h1>Blogilista</h1>
       <p>Kirjautuneena nimellä: {user.name}</p>
       <form onSubmit={handleLogOut}>
