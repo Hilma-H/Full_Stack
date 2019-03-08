@@ -5,17 +5,38 @@ import React from 'react';
 
 const createAnecdote = (content) => {
     return {
-      type: 'NEW_NOTE',
-      data:content
+      type: 'NEW',
+      data: content
     }
+}
+const createdMessage= (content) => {
+  return {
+    type: 'ADDED',
+    data: content
+  }
+}
+const remove = () => {
+  return {
+    type: 'REMOVE'
+  }
 }
 
 const Anecdotes = ({store}) => {
   const addAnecdote = (event) => {
     event.preventDefault()
+    const element = event.target
+    const content = element.new.value
     store.dispatch(
-      createAnecdote(event.target.new.value)
+      createAnecdote(content)
     )
+    store.dispatch(
+      createdMessage(content)
+    )
+    setTimeout( () => {
+      store.dispatch(
+        remove()
+      )
+    }, 5000)
     event.target.new.value = ''
   }  
   return (

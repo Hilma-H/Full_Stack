@@ -10,18 +10,51 @@ const voting = (id) => {
       }
     }
 
+ const votedMessage = (content) => {
+   return {
+     type: 'VOTED',
+    content: content
+   }
+ }
+
+ const remove = () => {
+   return {
+     type: 'REMOVE'
+   }
+ }
+
 const AnecdotesList = ({store}) => {
-    const anecdotes = store.getState()
+    const {anecdotes, filter} = store.getState()
+    console.log('lista', anecdotes)
+  const whatToShow = () => {
+    if (filter === 'ALL') {
+      return anecdotes
+    } else {
+      const show = anecdotes.filter(s => s.content.includes(filter))
+      return show
+    }
+
+  }
     const vote = (id) => {
     console.log('vote', id)
+    const voted = anecdotes.filter(a => a.id === id)
+    const content = voted.map(a => a.content)
     store.dispatch(
-      voting(id)
+      voting(id),
     )
+    store.dispatch(
+      votedMessage(content)
+    )
+    setTimeout( () => {
+      store.dispatch(
+        remove()
+      )
+    }, 5000)
     }
-    
+
     return (
     <div>
-        {anecdotes.map(anecdote =>
+        {whatToShow().map(anecdote =>
         <div key={anecdote.id}>
           <div>
             {anecdote.content}

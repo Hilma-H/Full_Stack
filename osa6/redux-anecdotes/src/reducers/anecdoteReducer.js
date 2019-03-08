@@ -28,7 +28,7 @@ const functionSort = (a,b) => {
 }
 const initialState = anecdotesAtStart.map(asObject)
 
-const reducer = (state = initialState, action) => {
+const anecdoteReducer = (state = initialState, action) => {
   console.log('state now: ', state)
   console.log('action', action)
   let newState = state
@@ -44,14 +44,12 @@ const reducer = (state = initialState, action) => {
       newState.sort(functionSort)
       state = newState
       return state.map(n => n.id !== id ? n : changed)
-    case 'CREATE':
-      return {
-        content: state.anecdote,
-        id: getId(),
-        votes: 0
-      }
+    case 'NEW':
+      return [
+        ...state, asObject(action.data)
+      ] 
     default:return state
   }
 }
 
-export default reducer
+export default anecdoteReducer
